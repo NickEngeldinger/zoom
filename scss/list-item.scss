@@ -1,0 +1,48 @@
+@import 'variables';
+@import 'mixins';
+
+.callout {
+	border: solid 1px #ddd;
+	border-bottom: solid 3px #000;
+	margin: auto auto 1rem;
+}
+
+aside {
+	color: #aaa;
+	font-size: 1.25rem;
+	font-weight: bold;
+	line-height: 1;
+	padding-top: 0.5rem;
+
+	p {
+		margin: 0;
+		margin-top: -0.35rem;
+		text-transform: uppercase;
+	}
+}
+
+article {
+	h4 {
+		font-weight: bold;
+		margin-bottom: 0;
+	}
+	
+	h5,
+	a {
+		color: $secondary;
+		font-weight: bold;
+		position: relative;
+		transition: all 0.5s ease;
+	}
+
+	a {
+		&:hover {
+			color: $brand;
+		}
+
+		&.show-more {
+			color: $brand;
+			@include animated-underline;			
+		}
+	}
+}

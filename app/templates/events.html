@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Zoom Care &ndash; Events</title>
+	<link rel="stylesheet" href="css/foundation.min.css">
+	<link rel="stylesheet" href="css/font-awesome.min.css">
+	<link rel="stylesheet" href="css/styles.min.css">
+</head>
+<body>
+	<div ng-app="zoomEvents" ng-controller="eventsList">
+		<header class="row">
+			<p class="large-9 columns">
+				ZOOM&plus;Events
+			</p>
+			<select name="location-filter" id="location-filter"	class="large-3"
+				ng-model="locationFilter" 
+				ng-options="zEvent.whereName for zEvent in zEvents | unique: 'whereName'"
+			>
+				<option value="">All Locations</option>
+			</select>
+		</header>
+		<ul class="no-bullet">
+			<li class="row callout" ng-repeat="zEvent in zEvents | filter: locationFilter.whereName">
+				<aside class="large-3 columns">
+					<p>{{ zEvent.day | date: 'EEE'}}</p>
+					<p>{{ zEvent.day | date: 'MMM d' | dateSuffix}}</p>
+					<span>
+						{{ zEvent.start | timeFormat | date: 'h' }}
+						<span ng-if="zEvent.finish">&ndash;</span>
+						<span ng-if="!zEvent.finish">{{ zEvent.start | timeFormat | date: 'a' | lowercase}}</span> 
+						{{ zEvent.finish | timeFormat | date: 'h a' | lowercase}}
+					</span>
+				</aside>
+				<article class="large-9 columns">
+					<i ng-click="remove(zEvent)" class="fa fa-times float-right"></i>
+					<h4>{{ zEvent.title }}</h4>
+					<h5 ng-bind-html="zEvent.where | trustedHtml"></h5>
+					<p ng-init="limit = 300; moreShown = false">
+						{{ zEvent.description | limitTo: limit }}
+						<a href class="show-more" 
+							ng-show="zEvent.description.length > limit" 
+							ng-click="limit=zEvent.description.length; moreShown=true"
+						>More</a>
+					</p>
+					<a href="{{ zEvent.link }}">RSVP <i class="fa fa-chevron-right"></i><i class="fa fa-chevron-right chev2"></i><i class="fa fa-chevron-right chev3"></i></a>
+				</article>
+			</li>
+		</ul>
+	</div>
+
+	<script src="js/angular-1.6.4.min.js"></script>
+	<script src="js/angular-filter-0.5.8.min.js"></script>
+	<script src="js/app.js"></script>
+</body>
+</html>

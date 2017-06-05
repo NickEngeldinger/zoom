@@ -1,0 +1,29 @@
+@import 'variables';
+
+i {
+	&.fa-chevron-right {
+		color: $brand;
+		position: absolute;
+			top: 2px;
+			right: -18px;
+		transition: transform 0.75s ease;
+	}
+
+	&.fa-times {
+		color: #ccc;
+		transition: all 0.5s ease;
+
+		&:hover {
+			color: $brand;
+			cursor: pointer;
+		}
+	}
+}
+
+a:hover i.fa-chevron-right.chev2 {
+	transform: translateX(10px);
+}
+
+a:hover i.fa-chevron-right.chev3 {
+	transform: translateX(20px);
+}
