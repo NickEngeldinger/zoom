@@ -1,23 +1,5 @@
 const app = angular.module('zoomEvents', ['angular.filter']);
-app.filter('trustedHtml', ($sce) => $sce.trustAsHtml);
-app.filter('timeFormat', ($filter) => {
-	return (time) => {
-		let d;
-		time !== undefined ? d = new Date('January 1, 2001 ' + time + ':00') : d = '';
-		return d;
-	}
-});
-app.filter('dateSuffix', function($filter) {
-  var suffixes = ["th", "st", "nd", "rd"];
-  return function(input) {
-    var dtfilter = $filter('date')(input, 'MMMM dd');
-    var day = parseInt(dtfilter.slice(-2));
-    var relevantDigits = (day < 30) ? day % 20 : day % 30;
-    var suffix = (relevantDigits <= 3) ? suffixes[relevantDigits] : suffixes[0];
-    return dtfilter+suffix;
-  };
-});
-app.controller('eventsList', ($scope, $http) => {
+app.controller('EventsListController', ($scope, $http) => {
 	$http.get('https://crossorigin.me/https://api.zoomcare.com/zoomapi-service/v2/rest/content/type/event')
 		.then(response => {
 			$scope.zEvents = response.data.map((obj) => {
@@ -36,4 +18,22 @@ app.controller('eventsList', ($scope, $http) => {
 		$scope.zEvents.splice(index, 1);
 	}
 
+});
+app.filter('trustedHtml', ($sce) => $sce.trustAsHtml);
+app.filter('timeFormat', ($filter) => {
+	return (time) => {
+		let d;
+		time !== undefined ? d = new Date('January 1, 2001 ' + time + ':00') : d = '';
+		return d;
+	}
+});
+app.filter('dateSuffix', function($filter) {
+  var suffixes = ["th", "st", "nd", "rd"];
+  return function(input) {
+    var dtfilter = $filter('date')(input, 'MMMM dd');
+    var day = parseInt(dtfilter.slice(-2));
+    var relevantDigits = (day < 30) ? day % 20 : day % 30;
+    var suffix = (relevantDigits <= 3) ? suffixes[relevantDigits] : suffixes[0];
+    return dtfilter+suffix;
+  };
 });

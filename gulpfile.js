@@ -29,19 +29,19 @@ gulp.task('cleanup', function() {
 gulp.task('build-css', function() {
 	runSequence('sass', 'cleanup')
 });
-
+ 
 gulp.task('build-js', function() {
 	return gulp.src([
 		'app/modules/zoom-events.js', 
+		'app/controllers/events-list.js',
 		'app/filters/trusted-html.js',
 		'app/filters/time-format.js',
 		'app/filters/date-suffix.js',
-		'app/controllers/events-list.js'
 	])
 		.pipe(concat('app.js'))
 		.pipe(strip())
 		.pipe(gulp.dest('public/js/'))
-})
+});
 
 gulp.task('watch', function() {
 	gulp.watch('scss/*.scss', ['build-css']);
