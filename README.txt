@@ -13,4 +13,4 @@ Angular app developed with a pre 1.5 (non-component based) structure, I did this
 	
 3. Implement a feature on the client side that you feel would be as/more useful than the above two.
 
-I addition to implementing features one and two, I added a  location based filter to fufill the third feature. See devnotes.txt for a walk through the development of the app.
+In addition to implementing features one and two, I added a  location based filter to fufill the third feature. See devnotes.txt for a walk through the development of the app.
